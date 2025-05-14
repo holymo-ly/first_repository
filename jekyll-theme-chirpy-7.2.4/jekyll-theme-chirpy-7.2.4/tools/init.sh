@@ -97,7 +97,7 @@ init_files() {
 }
 
 commit() {
-  git add -A
+  git add .
   git commit -m "chore: initialize the environment" -q
   echo -e "\n> Initialization successful!\n"
 }
