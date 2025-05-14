@@ -66,7 +66,10 @@ check_env() {
 
 reset_latest() {
   git reset --hard "$RELEASE_HASH"
+
+if [[ -n $(git clean -nd) ]]; then
   git clean -fd
+fi
   git submodule update --init --recursive
 }
 
