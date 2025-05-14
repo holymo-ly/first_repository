@@ -86,7 +86,7 @@ init_files() {
   _sedi "s/(^timezone:).*/\1/;s/(^.*cdn:).*/\1/;s/(^avatar:).*/\1/" _config.yml
 
   # remove the other files
-  rm -rf tools/init.sh tools/release.sh _posts/*
+  # rm -rf tools/init.sh tools/release.sh _posts/*
 
   # build assets
   npm i && npm run build
@@ -107,6 +107,8 @@ main() {
   reset_latest
   init_files
   commit
+
+rm -rf tools/init.sh tools/release.sh _posts/*
 }
 
 while (($#)); do
