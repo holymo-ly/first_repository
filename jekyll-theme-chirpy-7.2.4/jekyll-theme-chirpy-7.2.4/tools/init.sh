@@ -66,10 +66,7 @@ check_env() {
 
 reset_latest() {
   git reset --hard "$RELEASE_HASH"
-
-if [[ -n $(git clean -nd) ]]; then
   git clean -fd
-fi
   git submodule update --init --recursive
 }
 
@@ -89,7 +86,7 @@ init_files() {
   _sedi "s/(^timezone:).*/\1/;s/(^.*cdn:).*/\1/;s/(^avatar:).*/\1/" _config.yml
 
   # remove the other files
-  # rm -rf tools/init.sh tools/release.sh _posts/*
+  rm -rf tools/init.sh tools/release.sh _posts/*
 
   # build assets
   npm i && npm run build
@@ -100,7 +97,7 @@ init_files() {
 }
 
 commit() {
-  git add .
+  git add -A
   git commit -m "chore: initialize the environment" -q
   echo -e "\n> Initialization successful!\n"
 }
@@ -110,8 +107,6 @@ main() {
   reset_latest
   init_files
   commit
-
-rm -rf tools/init.sh tools/release.sh _posts/*
 }
 
 while (($#)); do
